@@ -63,12 +63,14 @@ public class App {
 
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
         ArrayList<Integer> list = new ArrayList<>();
 
-        while (scanner.hasNextInt()) {
-            int number = scanner.nextInt();
-            list.add(number);
+        try (Scanner scanner = new Scanner(System.in)) {
+        
+            while (scanner.hasNextInt()) {
+                int number = scanner.nextInt();
+                list.add(number);
+            }
         }
 
         int[] numbers = new int[list.size()];
