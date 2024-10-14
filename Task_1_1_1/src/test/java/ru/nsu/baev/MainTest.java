@@ -6,17 +6,38 @@ import static org.junit.jupiter.api.Assertions.*;
 class MainTest {
 
     @Test
-    void testGetGreeting() {
-        Main main = new Main();
-        String greeting = main.getGreeting();
-        assertEquals("Hello World!", greeting, "Greeting should be 'Hello World!'");
+    void testHeapSort1() {
+        int[] input = {3, 1, 4, 1, 5, 9, 2};
+        int[] expected = {1, 1, 2, 3, 4, 5, 9};
+
+        Main.heapSort(input);
+
+        assertArrayEquals(expected, input, "Array should be sorted");
     }
 
     @Test
-    void testHeapSort() {
-        Main main = new Main();
-        int[] input = {3, 1, 4, 1, 5, 9, 2};
-        int[] expected = {1, 1, 2, 3, 4, 5, 9};
+    void testHeapSort2() {
+        int[] input = {4, 6, 1, 43, 6, 4, 88, 9};
+        int[] expected = {1, 4, 4, 6, 6, 9, 43, 88};
+
+        Main.heapSort(input);
+
+        assertArrayEquals(expected, input, "Array should be sorted");
+    }
+
+    @Test
+    void testHeapSort3() {
+        int[] input = {1};
+        int[] expected = {1};
+
+        Main.heapSort(input);
+
+        assertArrayEquals(expected, input, "Array should be sorted");
+    }
+
+    void testHeapSort4() {
+        int[] input = {1, 2, 3, 4, 5};
+        int[] expected = {1, 2, 3, 4, 5};
 
         Main.heapSort(input);
 
