@@ -55,7 +55,10 @@ public class Main {
         System.out.println("");
     }
 
-
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
 
         ArrayList<Integer> list = new ArrayList<>();
