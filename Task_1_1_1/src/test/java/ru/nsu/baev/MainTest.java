@@ -35,6 +35,7 @@ class MainTest {
         assertArrayEquals(expected, input, "Array should be sorted");
     }
 
+    @Test
     void testHeapSort4() {
         int[] input = {1, 2, 3, 4, 5};
         int[] expected = {1, 2, 3, 4, 5};
