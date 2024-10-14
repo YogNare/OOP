@@ -9,8 +9,8 @@ public class Main {
      * helper function for sorting.
      *
      * @param arr is integer array.
-     * @param n maximal index.
-     * @param i swap index.
+     * @param n is maximal index.
+     * @param i is swap index.
      */
     public static void heapify(int[] arr, int n, int i) {
 
