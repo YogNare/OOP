@@ -7,9 +7,9 @@ public class Main {
 
     /**
      * helper function for sorting
-     * @param arr is integer array
-     * @param n maximal index
-     * @param i swap index
+     * @param arr is integer array.
+     * @param n maximal index.
+     * @param i swap index.
      */
     public static void heapify(int[] arr, int n, int i) {
 
@@ -28,9 +28,9 @@ public class Main {
 
     /**
      * Swap function
-     * @param arr is integer array
-     * @param i is first element index
-     * @param j is second element index
+     * @param arr is integer array.
+     * @param i is first element index.
+     * @param j is second element index.
      */
     public static void swap(int[] arr, int i, int j) {
 
@@ -68,8 +68,8 @@ public class Main {
     }
 
     /**
-     *
-     * @param args
+     * main function
+     * @param args is basic arguments.
      */
     public static void main(String[] args) {
 
