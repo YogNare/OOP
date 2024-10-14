@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Main {
 
     /**
-     * helper function for sorting
+     * helper function for sorting.
      * @param arr is integer array.
      * @param n maximal index.
      * @param i swap index.
@@ -27,7 +27,7 @@ public class Main {
     }
 
     /**
-     * Swap function
+     * Swap function.
      * @param arr is integer array.
      * @param i is first element index.
      * @param j is second element index.
@@ -40,7 +40,7 @@ public class Main {
     }
 
     /**
-     * It is heap sort
+     * It is heap sort.
      * @param arr is integer array.
      */
     public static void heapSort(int[] arr) {
@@ -56,7 +56,10 @@ public class Main {
         }
     }
 
-
+    /**
+     * function for print array.
+     * @param arr is integer array.
+     */
     public static void printArr(int[] arr) {
 
         for (int i = 0; i < arr.length; i ++) {
@@ -68,7 +71,7 @@ public class Main {
     }
 
     /**
-     * main function
+     * main function.
      * @param args is basic arguments.
      */
     public static void main(String[] args) {
