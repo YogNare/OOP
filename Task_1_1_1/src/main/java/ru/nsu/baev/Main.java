@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-    public String getGreeting() {
-        return "Hello World!";
-    }
 
+    /**
+     * helper function for sorting
+     * @param arr is integer array
+     * @param n maximal index
+     * @param i swap index
+     */
     public static void heapify(int[] arr, int n, int i) {
 
         int largest = i;
@@ -23,6 +26,12 @@ public class Main {
         }
     }
 
+    /**
+     * Swap function
+     * @param arr is integer array
+     * @param i is first element index
+     * @param j is second element index
+     */
     public static void swap(int[] arr, int i, int j) {
 
         int temp = arr[i];
@@ -30,7 +39,10 @@ public class Main {
         arr[j] = temp;
     }
 
-
+    /**
+     * It is heap sort
+     * @param arr is integer array.
+     */
     public static void heapSort(int[] arr) {
 
         for (int i = arr.length - 1; i >= 0; i --) {
