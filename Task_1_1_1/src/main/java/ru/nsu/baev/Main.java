@@ -7,6 +7,7 @@ public class Main {
 
     /**
      * helper function for sorting.
+     *
      * @param arr is integer array.
      * @param n maximal index.
      * @param i swap index.
@@ -28,6 +29,7 @@ public class Main {
 
     /**
      * Swap function.
+     *
      * @param arr is integer array.
      * @param i is first element index.
      * @param j is second element index.
@@ -41,6 +43,7 @@ public class Main {
 
     /**
      * It is heap sort.
+     *
      * @param arr is integer array.
      */
     public static void heapSort(int[] arr) {
@@ -58,6 +61,7 @@ public class Main {
 
     /**
      * function for print array.
+     *
      * @param arr is integer array.
      */
     public static void printArr(int[] arr) {
@@ -72,6 +76,7 @@ public class Main {
 
     /**
      * main function.
+     *
      * @param args is basic arguments.
      */
     public static void main(String[] args) {
