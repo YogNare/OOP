@@ -18,7 +18,7 @@ class MainTest {
         int[] input = {3, 1, 4, 1, 5, 9, 2};
         int[] expected = {1, 1, 2, 3, 4, 5, 9};
 
-        Main.heap_sort(input);
+        Main.heapSort(input);
 
         assertArrayEquals(expected, input, "Array should be sorted");
     }

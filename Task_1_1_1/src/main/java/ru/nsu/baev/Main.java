@@ -31,7 +31,7 @@ public class Main {
     }
 
 
-    public static int heap_sort(int[] arr) {
+    public static void heapSort(int[] arr) {
 
         for (int i = arr.length - 1; i >= 0; i --) {
 
@@ -42,12 +42,10 @@ public class Main {
             swap(arr, i, 0);
             heapify(arr, i, 0);
         }
-
-        return 0;
     }
 
 
-    public static void print_arr(int[] arr) {
+    public static void printArr(int[] arr) {
 
         for (int i = 0; i < arr.length; i ++) {
 
@@ -75,8 +73,8 @@ public class Main {
             numbers[i] = list.get(i);
         }
 
-        heap_sort(numbers);
+        heapSort(numbers);
 
-        print_arr(numbers);
+        printArr(numbers);
     }
 }
