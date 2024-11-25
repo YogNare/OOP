@@ -46,16 +46,21 @@ public class Hand {
             this.aceCount += 1;
             this.sum += 11;
         }
-        else
+        else {
             this.sum += this.intCardValue[card % 13];
+        }
 
         while (this.aceCount > 0 && this.sum > 21) {
             this.sum -= 10;
             this.aceCount -= 1;
         }
 
-        if (this.sum > 21) return 1;
-        else return 0;
+        if (this.sum > 21) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
     }
 
     /**
@@ -78,14 +83,12 @@ public class Hand {
         takeCard();
         takeCard();
 
-        if (this.sum == 21)
+        if (this.sum == 21) {
             return 1;
-        else
+        }
+        else {
             return 0;
+        }
     }
-//    public void firstDistribution() {
-//        deck.getCard();
-//        deck.getCard();
-//    }
 
 }

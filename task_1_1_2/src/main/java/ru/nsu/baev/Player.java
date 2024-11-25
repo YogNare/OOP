@@ -73,18 +73,22 @@ public class Player extends Hand {
             System.out.println("Card?");
             choice = scanner.nextLine();
 
-            if (choice.equals("yes"))
+            if (choice.equals("yes")) {
                 result = takeCard();
+            }
 
-            else if (choice.equals("no"))
+            else if (choice.equals("no")) {
                 break;
+            }
 
 
             System.out.print("\033[2J");
             dealer.printCards(0);
             printCards();
 
-            if (result > 0) break;
+            if (result > 0) {
+                break;
+            }
         }
 
         return result;

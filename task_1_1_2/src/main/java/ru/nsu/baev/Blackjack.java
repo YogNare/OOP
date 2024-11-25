@@ -108,8 +108,9 @@ public class Blackjack {
         while(!end_game) {
             System.out.println("Do you want play round " + round ++);
             choice = this.scanner.nextLine();
-            if (choice.equals("no"))
+            if (choice.equals("no")) {
                 return;
+            }
 
             result = 0;
 
