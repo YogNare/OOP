@@ -1,4 +1,5 @@
 package ru.nsu.baev;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,11 +10,11 @@ import java.util.List;
 public class Hand {
 
     public int sum = 0;
-    protected int ace_count = 0;
+    protected int aceCount = 0;
     protected Deck deck;
-    protected final String[] card_value = {"2", "3", "4", "5", "6", "7", "8", "9", "X", "J", "Q", "K", "A"};
-    protected final String[] card_suit = {"♠", "♣", "♥", "♦"};
-    protected final Integer[] int_card_value = {2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10};
+    protected final String[] cardValue = {"2", "3", "4", "5", "6", "7", "8", "9", "X", "J", "Q", "K", "A"};
+    protected final String[] cardSuit = {"♠", "♣", "♥", "♦"};
+    protected final Integer[] intCardValue = {2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10};
     protected List<Integer> hand = new ArrayList<>();
 
 
@@ -39,15 +40,15 @@ public class Hand {
         this.hand.add(card);
 
         if (card % 13 == 12) {
-            this.ace_count += 1;
+            this.aceCount += 1;
             this.sum += 11;
         }
         else
-            this.sum += this.int_card_value[card % 13];
+            this.sum += this.intCardValue[card % 13];
 
-        while (this.ace_count > 0 && this.sum > 21) {
+        while (this.aceCount > 0 && this.sum > 21) {
             this.sum -= 10;
-            this.ace_count -= 1;
+            this.aceCount -= 1;
         }
 
         if (this.sum > 21) return 1;
@@ -59,7 +60,7 @@ public class Hand {
      */
     public void reset() {
         this.hand = new ArrayList<>();
-        this.ace_count = 0;
+        this.aceCount = 0;
         this.sum = 0;
     }
 

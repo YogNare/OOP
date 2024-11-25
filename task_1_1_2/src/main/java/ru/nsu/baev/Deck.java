@@ -1,4 +1,5 @@
 package ru.nsu.baev;
+
 import java.util.Random;
 
 /**
@@ -6,7 +7,7 @@ import java.util.Random;
  */
 public class Deck {
 
-    private int[] main_deck = new int[52];
+    private int[] mainDeck = new int[52];
     private int counter = 0;
 
     /**
@@ -15,7 +16,7 @@ public class Deck {
     public Deck() {
 
         for (int i = 0; i < 52; i ++) {
-            this.main_deck[i] = i;
+            this.mainDeck[i] = i;
         }
     }
 
@@ -28,7 +29,7 @@ public class Deck {
         if (this.counter == 0)
             shuffleArray();
 
-        return this.main_deck[this.counter ++];
+        return this.mainDeck[this.counter ++];
     }
 
     /**
@@ -42,9 +43,9 @@ public class Deck {
 
             int j = random.nextInt(i + 1);
 
-            int temp = this.main_deck[j];
-            this.main_deck[j] = this.main_deck[i];
-            this.main_deck[i] = temp;
+            int temp = this.mainDeck[j];
+            this.mainDeck[j] = this.mainDeck[i];
+            this.mainDeck[i] = temp;
         }
     }
 }

@@ -34,7 +34,7 @@ public class Player extends Hand {
         System.out.print(top.repeat(this.hand.size()) + "\n");
 
         for (Integer card : this.hand) {
-            String suit = this.card_suit[card / 13];
+            String suit = this.cardSuit[card / 13];
             System.out.printf(middle1, suit, suit);
         }
         System.out.print("\n");
@@ -42,7 +42,7 @@ public class Player extends Hand {
         System.out.print(middle2.repeat(this.hand.size()) + "\n");
 
         for (Integer card : this.hand) {
-            String value = this.card_value[card % 13];
+            String value = this.cardValue[card % 13];
             System.out.printf(middle3, value);
         }
         System.out.print("\n");
@@ -50,7 +50,7 @@ public class Player extends Hand {
         System.out.print(middle2.repeat(this.hand.size()) + "\n");
 
         for (Integer card : this.hand) {
-            String suit = this.card_suit[card / 13];
+            String suit = this.cardSuit[card / 13];
             System.out.printf(middle1, suit, suit);
         }
         System.out.print("\n");

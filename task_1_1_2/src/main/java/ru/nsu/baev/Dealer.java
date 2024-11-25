@@ -24,8 +24,8 @@ public class Dealer extends Hand {
     public void printCards(int visible) {
         if (visible == 0) {
             System.out.println("Bot: ");
-            String suit = this.card_suit[this.hand.get(0)/13];
-            String value = this.card_value[this.hand.get(0)%13];
+            String suit = this.cardSuit[this.hand.get(0)/13];
+            String value = this.cardValue[this.hand.get(0)%13];
             System.out.printf(
                     "┌───────┐ ┌───────┐\n" +
                     "│%s     %s│ │?     ?│\n" +
@@ -48,7 +48,7 @@ public class Dealer extends Hand {
             System.out.print(top.repeat(this.hand.size()) + "\n");
 
             for (Integer card : this.hand) {
-                String suit = this.card_suit[card / 13];
+                String suit = this.cardSuit[card / 13];
                 System.out.printf(middle1, suit, suit);
             }
             System.out.print("\n");
@@ -56,7 +56,7 @@ public class Dealer extends Hand {
             System.out.print(middle2.repeat(this.hand.size()) + "\n");
 
             for (Integer card : this.hand) {
-                String value = this.card_value[card % 13];
+                String value = this.cardValue[card % 13];
                 System.out.printf(middle3, value);
             }
             System.out.print("\n");
@@ -64,7 +64,7 @@ public class Dealer extends Hand {
             System.out.print(middle2.repeat(this.hand.size()) + "\n");
 
             for (Integer card : this.hand) {
-                String suit = this.card_suit[card / 13];
+                String suit = this.cardSuit[card / 13];
                 System.out.printf(middle1, suit, suit);
             }
             System.out.print("\n");
