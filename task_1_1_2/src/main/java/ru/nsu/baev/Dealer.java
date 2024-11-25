@@ -36,8 +36,7 @@ public class Dealer extends Hand {
                     "│       │ │       │\n" +
                     "│%s     %s│ │?     ?│\n" +
                     "└───────┘ └───────┘\n\n", suit, suit, value, suit, suit);
-        }
-        else {
+        } else {
             System.out.println("Bot: " + sum);
 
             String top = "┌───────┐ ";

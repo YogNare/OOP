@@ -75,9 +75,7 @@ public class Player extends Hand {
 
             if (choice.equals("yes")) {
                 result = takeCard();
-            }
-
-            else if (choice.equals("no")) {
+            } else if (choice.equals("no")) {
                 break;
             }
 

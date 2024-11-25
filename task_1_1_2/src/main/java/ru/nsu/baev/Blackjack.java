@@ -38,12 +38,10 @@ public class Blackjack {
             this.dealer.win ++;
             this.player.win ++;
             return 3;
-        }
-        else if (dealer_blackjack == 1) {
+        } else if (dealer_blackjack == 1) {
             this.dealer.win ++;
             return 2;
-        }
-        else if (player_blackjack == 1) {
+        } else if (player_blackjack == 1) {
             this.player.win ++;
             return 1;
         }
@@ -68,27 +66,26 @@ public class Blackjack {
         dealer.printCards(1);
         player.printCards();
 
-        if (blackjack == 3)
+        if (blackjack == 3) {
             System.out.println("how...\ndraw");
-
-        else if (blackjack == 2)
+        } else if (blackjack == 2) {
             System.out.println("What the hell\n" +
                     "BLACKJACK\n" +
                     "CASINO WIN!!!");
-
-        else if (blackjack == 1)
+        } else if (blackjack == 1) {
             System.out.println("What the hell\n" +
                     "BLACKJACK\n" +
                     "YOU WIN!!!");
-
-        else {
-            if (res == 2)
+        } else {
+            if (res == 2) {
                 System.out.println("dealer win");
-            else if (res == 1)
+            } else if (res == 1) {
                 System.out.println("you win");
-            else
+            } else {
                 System.out.println("draw");
+            }
         }
+
         printScore();
     }
 

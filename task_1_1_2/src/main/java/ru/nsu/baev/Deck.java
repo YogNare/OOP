@@ -27,6 +27,7 @@ public class Deck {
      */
     public int getCard() {
         this.counter %= 52;
+
         if (this.counter == 0) {
             shuffleArray();
         }

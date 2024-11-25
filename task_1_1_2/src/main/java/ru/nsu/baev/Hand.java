@@ -28,8 +28,7 @@ public class Hand {
     public static void sleepy(int second) {
         try {
             Thread.sleep(second * 1000); // Задержка на 1 секунду
-        }
-        catch (InterruptedException e) {
+        } catch (InterruptedException e) {
             System.out.println("Поток был прерван");
         }
     }
@@ -46,8 +45,7 @@ public class Hand {
         if (card % 13 == 12) {
             this.aceCount += 1;
             this.sum += 11;
-        }
-        else {
+        } else {
             this.sum += this.intCardValue[card % 13];
         }
 
@@ -58,8 +56,7 @@ public class Hand {
 
         if (this.sum > 21) {
             return 1;
-        }
-        else {
+        } else {
             return 0;
         }
     }
@@ -86,8 +83,7 @@ public class Hand {
 
         if (this.sum == 21) {
             return 1;
-        }
-        else {
+        } else {
             return 0;
         }
     }
