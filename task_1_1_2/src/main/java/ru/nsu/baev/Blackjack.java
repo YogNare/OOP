@@ -25,6 +25,7 @@ public class Blackjack {
     /**
      * init dealer.
      * init player.
+     *
      * @return 3 if both blackjack, 2 if dealer blackjack, 1 if player blackjack else 0.
      */
     private int initRound() {
@@ -59,6 +60,7 @@ public class Blackjack {
 
     /**
      * print result.
+     *
      * @param res - result.
      * @param blackjack - if somebody has blackjack.
      */
@@ -150,6 +152,7 @@ public class Blackjack {
 
     /**
      * main.
+     *
      * @param args - args for main.
      */
     public static void main(String[] args){

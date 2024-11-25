@@ -22,6 +22,7 @@ public class Deck {
 
     /**
      * Get card.
+     * 
      * @return number of card.
      */
     public int getCard() {

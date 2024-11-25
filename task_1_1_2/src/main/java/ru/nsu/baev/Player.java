@@ -11,6 +11,7 @@ public class Player extends Hand {
 
     /**
      * init function.
+     *
      * @param deck - Deck deck.
      */
     public Player(Deck deck) {
@@ -60,6 +61,7 @@ public class Player extends Hand {
 
     /**
      * logic of player.
+     *
      * @param scanner - Scanner scanner.
      * @param dealer - Dealer dealer.
      * @return 1 if sum > 21 else 0.

@@ -11,6 +11,7 @@ public class Dealer extends Hand {
 
     /**
      * init function.
+     *
      * @param deck - Deck deck.
      */
     public Dealer(Deck deck) {
@@ -19,6 +20,7 @@ public class Dealer extends Hand {
 
     /**
      * print dealer cards.
+     *
      * @param visible - visible, if visible == 0 1 card not visible else all cards visible.
      */
     public void printCards(int visible) {
@@ -75,6 +77,7 @@ public class Dealer extends Hand {
 
     /**
      * logic of dealer.
+     *
      * @param scanner - Scanner scanner.
      * @param player - player.
      * @return 1 if sum > 21 else 0.

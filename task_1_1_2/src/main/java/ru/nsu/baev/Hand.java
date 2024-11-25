@@ -20,6 +20,7 @@ public class Hand {
 
     /**
      * delay function.
+     *
      * @param second - delay time.
      */
     public static void sleepy(int second) {
@@ -67,6 +68,7 @@ public class Hand {
     /**
      * clear hand.
      * give 2 cards.
+     *
      * @return 1 if blackjack else 0.
      */
     public int startRound(){

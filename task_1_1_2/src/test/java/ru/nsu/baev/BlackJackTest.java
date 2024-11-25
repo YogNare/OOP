@@ -18,7 +18,5 @@ class BlackJackTest {
     public void testTakeCard() {
         Deck deck = new Deck();
         Player player = new Player(deck);
-
-//        pla
     }
 }
