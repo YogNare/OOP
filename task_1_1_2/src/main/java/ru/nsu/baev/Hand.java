@@ -16,6 +16,7 @@ public class Hand {
     protected final Integer[] int_card_value = {2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10};
     protected List<Integer> hand = new ArrayList<>();
 
+
     /**
      * delay function.
      * @param second - delay time.
