@@ -12,7 +12,8 @@ public class Hand {
     public int sum = 0;
     protected int aceCount = 0;
     protected Deck deck;
-    protected final String[] cardValue = {"2", "3", "4", "5", "6", "7", "8", "9", "X", "J", "Q", "K", "A"};
+    protected final String[] cardValue =
+            {"2", "3", "4", "5", "6", "7", "8", "9", "X", "J", "Q", "K", "A"};
     protected final String[] cardSuit = {"♠", "♣", "♥", "♦"};
     protected final Integer[] intCardValue = {2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10};
     protected List<Integer> hand = new ArrayList<>();
@@ -26,7 +27,8 @@ public class Hand {
     public static void sleepy(int second) {
         try {
             Thread.sleep(second * 1000); // Задержка на 1 секунду
-        } catch (InterruptedException e) {
+        }
+        catch (InterruptedException e) {
             System.out.println("Поток был прерван");
         }
     }
