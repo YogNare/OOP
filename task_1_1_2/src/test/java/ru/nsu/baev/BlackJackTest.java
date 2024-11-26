@@ -6,17 +6,17 @@ import org.junit.jupiter.api.Test;
 
 class BlackJackTest {
 
-    @Test
-    public void whenAssertingArraysEquality() {
-        char[] expected = {'J', 'u', 'n', 'i', 't'};
-        char[] actual = "Junit".toCharArray();
+  @Test
+  public void whenAssertingArraysEquality() {
+    char[] expected = {'J', 'u', 'n', 'i', 't'};
+    char[] actual = "Junit".toCharArray();
 
-        assertArrayEquals(expected, actual);
-    }
+    assertArrayEquals(expected, actual);
+  }
 
-    @Test
-    public void testTakeCard() {
-        Deck deck = new Deck();
-        Player player = new Player(deck);
-    }
+  @Test
+  public void testTakeCard() {
+    Deck deck = new Deck();
+    Player player = new Player(deck);
+  }
 }
