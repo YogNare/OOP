@@ -24,8 +24,37 @@ public class Div extends Expression {
     }
 
     @Override
-    public double normal_eval(Map<String, Double> variables) {
-        return leftExpression.normal_eval(variables) / rightExpression.normal_eval(variables);
+    public double normalEval(Map<String, Double> variables) {
+        return leftExpression.normalEval(variables) / rightExpression.normalEval(variables);
+    }
+
+    @Override
+    public Expression simplification() {
+        Expression simplifiedLeft = leftExpression.simplification();
+        Expression simplifiedRight = rightExpression.simplification();
+
+        if (simplifiedLeft instanceof Number leftNum) {
+            double leftValue = leftNum.getValue();
+            if (simplifiedRight instanceof Number rightNum) {
+                double rightValue = rightNum.getValue();
+                return new Number(leftValue / rightValue);
+            }
+            if (leftValue == 0) {
+                return new Number(0);
+            }
+        }
+
+        if (simplifiedRight instanceof Number rightNum) {
+            double rightValue = rightNum.getValue();
+            if (rightValue == 1) {
+                return simplifiedLeft;
+            }
+            if (rightValue == 0) {
+                throw new ArithmeticException("Division by zero");
+            }
+        }
+
+        return new Div(simplifiedLeft, simplifiedRight);
     }
 
     @Override

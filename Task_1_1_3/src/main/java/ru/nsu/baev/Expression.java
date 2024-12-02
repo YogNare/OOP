@@ -8,7 +8,9 @@ public abstract class Expression {
 
     public abstract void print();
 
-    public abstract double normal_eval(Map<String, Double> variables);
+    public abstract double normalEval(Map<String, Double> variables);
+
+    public abstract Expression simplification();
 
     private static List<String> tokenize(String expression) {
         List<String> tokens = new ArrayList<>();
@@ -42,6 +44,7 @@ public abstract class Expression {
     }
 
     private static void applyOperator(Stack<Expression> expressions, String operator) {
+
         Expression right = expressions.pop();
         Expression left = expressions.pop();
         Expression result = switch (operator) {
