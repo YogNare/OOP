@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'jacoco'
+}
+
+//application {
+//    mainClass = 'src.main.java.ru.baev.'
+//}
+
+group = 'ru.nsu.baev'
+version = '1.0-SNAPSHOT'
+
+application {
+    mainClass = 'ru.nsu.baev.Blackjack'
+}
+
+run {
+    standardInput = System.in
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21) // Укажите вашу версию Java
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
