@@ -1,38 +1,39 @@
 package ru.nsu.baev;
 
-
 import java.util.Map;
 
 public class Div extends Expression {
 
-    Expression left_expression;
-    Expression right_expression;
+    private final Expression leftExpression;
+    private final Expression rightExpression;
 
-    public Div(Expression left_expression, Expression right_expression) {
-        this.left_expression = left_expression;
-        this.right_expression = right_expression;
+    public Div(Expression leftExpression, Expression rightExpression) {
+        this.leftExpression = leftExpression;
+        this.rightExpression = rightExpression;
     }
 
+    @Override
     public Div derivative(String variable) {
-
         return new Div(
-                new Sub (
-                    new Mul(this.left_expression.derivative(variable), this.right_expression),
-                    new Mul(this.left_expression, this.right_expression.derivative(variable))
+                new Sub(
+                        new Mul(leftExpression.derivative(variable), rightExpression),
+                        new Mul(leftExpression, rightExpression.derivative(variable))
                 ),
-                new Mul(this.right_expression, this.right_expression)
+                new Mul(rightExpression, rightExpression)
         );
     }
 
+    @Override
     public double normal_eval(Map<String, Double> variables) {
-        return this.left_expression.normal_eval(variables) / this.right_expression.normal_eval(variables);
+        return leftExpression.normal_eval(variables) / rightExpression.normal_eval(variables);
     }
 
+    @Override
     public void print() {
         System.out.print("(");
-        this.left_expression.print();
+        leftExpression.print();
         System.out.print("/");
-        this.right_expression.print();
+        rightExpression.print();
         System.out.print(")");
     }
 }

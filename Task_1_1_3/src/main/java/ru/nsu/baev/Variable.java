@@ -1,33 +1,25 @@
 package ru.nsu.baev;
 
-import java.awt.*;
 import java.util.Map;
 
 public class Variable extends Expression {
-    String variable;
+    private final String variable;
 
     public Variable(String variable) {
         this.variable = variable;
     }
 
+    @Override
     public Number derivative(String variable) {
-        if (variable.equals(this.variable)) {
-            return new Number(1);
-        }
-        else {
-            return new Number(0);
-        }
+        return this.variable.equals(variable) ? new Number(1) : new Number(0);
     }
 
+    @Override
     public double normal_eval(Map<String, Double> variables) {
-        if (variables.get("x") != null) {
-            return variables.get("x");
-        }
-        else {
-            return 0;
-        }
+        return variables.getOrDefault(this.variable, 0.0);
     }
 
+    @Override
     public void print() {
         System.out.print(this.variable);
     }
