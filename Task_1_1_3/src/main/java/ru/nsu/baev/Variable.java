@@ -2,7 +2,7 @@ package ru.nsu.baev;
 
 import java.util.Map;
 
-public class Variable extends Expression {
+public class Variable implements Expression {
     private final String name;
 
     public Variable(String name) {

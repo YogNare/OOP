@@ -2,7 +2,7 @@ package ru.nsu.baev;
 
 import java.util.Map;
 
-public class Mul extends Expression {
+public class Mul implements Expression {
 
     private final Expression left;
     private final Expression right;

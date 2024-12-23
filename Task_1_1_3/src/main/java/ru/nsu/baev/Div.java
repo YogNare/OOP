@@ -2,7 +2,7 @@ package ru.nsu.baev;
 
 import java.util.Map;
 
-public class Div extends Expression {
+public class Div implements Expression {
 
     private final Expression leftExpression;
     private final Expression rightExpression;

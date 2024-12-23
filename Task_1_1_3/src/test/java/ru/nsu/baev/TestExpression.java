@@ -58,8 +58,7 @@ public class TestExpression {
 
     @Test
     public void test1() {
-
-        Expression e = Expression.evaluate("3+2*x");
+        Expression e = ExpressionUtil.evaluate("3+2*x");
         e.print();
     }
 }
