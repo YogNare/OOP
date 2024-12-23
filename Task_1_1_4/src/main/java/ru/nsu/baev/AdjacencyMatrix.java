@@ -3,6 +3,10 @@ package ru.nsu.baev;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.File;
+import java.io.IOException;
 
 public class AdjacencyMatrix implements Graph {
     private final List<List<Integer>> matrix = new ArrayList<>();
@@ -100,6 +104,33 @@ public class AdjacencyMatrix implements Graph {
 
         return topologicalOrder;
     }
+
+    @Override
+    public AdjacencyMatrix readFromFile(String filePath) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        AdjacencyMatrix graph = new AdjacencyMatrix();
+
+        try {
+            JsonNode rootNode = objectMapper.readTree(new File(filePath));
+
+            int vertexCount = rootNode.get("vertexes").asInt();
+            IntStream.range(0, vertexCount).forEach(i -> graph.addVertex());
+
+            JsonNode edges = rootNode.get("edge");
+            for (JsonNode edge : edges) {
+                int from = edge.get(0).asInt();
+                int to = edge.get(1).asInt();
+                graph.addEdge(from, to);
+            }
+
+        } catch (IOException e) {
+            throw new RuntimeException("Error reading file: " + filePath, e);
+        }
+
+        return graph;
+    }
+
+
 
     private boolean isInvalidVertex(Integer vert) {
         return vert == null || vert < 0 || vert >= matrix.size();

@@ -1,5 +1,10 @@
 package ru.nsu.baev;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -129,6 +134,32 @@ public class IncidenceMatrix implements Graph {
 
         return topologicalOrder;
     }
+
+    @Override
+    public IncidenceMatrix readFromFile(String filePath) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        IncidenceMatrix graph = new IncidenceMatrix();
+
+        try {
+            JsonNode rootNode = objectMapper.readTree(new File(filePath));
+
+            int vertexCount = rootNode.get("vertexes").asInt();
+            IntStream.range(0, vertexCount).forEach(i -> graph.addVertex());
+
+            JsonNode edges = rootNode.get("edge");
+            for (JsonNode edge : edges) {
+                int from = edge.get(0).asInt();
+                int to = edge.get(1).asInt();
+                graph.addEdge(from, to);
+            }
+
+        } catch (IOException e) {
+            throw new RuntimeException("Error reading file: " + filePath, e);
+        }
+
+        return graph;
+    }
+
     private boolean isInvalidVertex(Integer vert) {
         return vert == null || vert < 0 || vert >= matrix.size();
     }
