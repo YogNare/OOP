@@ -1,10 +1,5 @@
 package ru.nsu.baev;
 
-import com.sun.source.tree.ArrayAccessTree;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static java.lang.Math.pow;
@@ -16,18 +11,13 @@ public class Main {
 
 
         for (int i = 1; i < 10; i ++) {
-            ArrayList<Integer> array = new ArrayList<>(List.of((int) pow(10, i)));
-//            long startTime1 = System.currentTimeMillis();
-//            ThreadPrimeNumbers test = new ThreadPrimeNumbers();
-//            test.notAllPrime(array, 5);
-//            long endTime1 = System.currentTimeMillis();
-//            long duration = endTime1 - startTime1;
+            List<Integer> array = List.of((int) pow(10, i));
 
-            long startTime2 = System.currentTimeMillis();
-            PrimeNumbers test2 = new PrimeNumbers();
-            test2.notAllPrime(array);
-            long endTime2 = System.currentTimeMillis();
-            long duration = endTime2 - startTime2;
+            long startTime = System.currentTimeMillis();
+            PrimeNumberChecker checker = new PrimeNumberChecker();
+            checker.allPrimes(array);
+            long endTime = System.currentTimeMillis();
+            long duration = endTime - startTime;
 
             System.out.println(duration);
         }

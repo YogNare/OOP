@@ -1,26 +1,29 @@
 package ru.nsu.baev;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.concurrent.TimeUnit;
+import java.util.List;
 
 public class ThreadPrimeNumbers {
 
-    public boolean notAllPrime(ArrayList<Integer> array, int numThreads) {
+    public boolean allPrimes(List<Integer> array, int numThreads) throws InterruptedException {
         if (!array.isEmpty()) {
+            if (Collections.min(array) < 2) {
+                return false;
+            }
             Integer maxNum = Collections.max(array);
-            boolean[] isPrime = sieve(maxNum + 1, numThreads);
-            if (isPrime.length < 1) return true;
+            boolean[] isPrime = createSieve(maxNum + 1, numThreads);
             for (Integer num : array) {
-                if (!isPrime[num]) return true;
+                if (!isPrime[num]) return false;
             }
         }
-
-        return false;
+        return true;
     }
 
-    public static boolean[] sieve(int limit, int numThreads) {
+    /**
+     * This array contains flags. Flag primes[i] determine that i-th number is prime.
+     */
+    private static boolean[] createSieve(int limit, int numThreads) throws InterruptedException {
         boolean[] isPrime = new boolean[limit + 1];
         Arrays.fill(isPrime, true);
         isPrime[0] = isPrime[1] = false;
@@ -57,11 +60,7 @@ public class ThreadPrimeNumbers {
         }
 
         for(Thread thread : threads) {
-            try {
-                thread.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            thread.join();
         }
 
         return isPrime;
