@@ -1,32 +1,52 @@
 package ru.nsu.baev;
 
-
 import java.util.Map;
 
 public class Add extends Expression {
 
-    Expression left_expression;
-    Expression right_expression;
+    private final Expression left;
+    private final Expression right;
 
-    public Add(Expression left_expression, Expression right_expression) {
-        this.left_expression = left_expression;
-        this.right_expression = right_expression;
+    public Add(Expression left, Expression right) {
+        this.left = left;
+        this.right = right;
     }
 
+    @Override
     public Add derivative(String variable) {
-
-        return new Add(this.left_expression.derivative(variable), this.right_expression.derivative(variable));
+        return new Add(left.derivative(variable), right.derivative(variable));
     }
 
-    public double normal_eval(Map<String, Double> variables) {
-        return this.left_expression.normal_eval(variables) + this.right_expression.normal_eval(variables);
+    @Override
+    public double normalEval(Map<String, Double> variables) {
+        return left.normalEval(variables) + right.normalEval(variables);
     }
 
+    @Override
+    public Expression simplification() {
+        Expression simplifiedLeft = left.simplification();
+        Expression simplifiedRight = right.simplification();
+
+        if (simplifiedLeft instanceof Number leftNum) {
+            if (simplifiedRight instanceof Number rightNum) {
+                return new Number(leftNum.getValue() + rightNum.getValue());
+            }
+            if (leftNum.getValue() == 0) {
+                return simplifiedRight;
+            }
+        } else if (simplifiedRight instanceof Number rightNum && rightNum.getValue() == 0) {
+            return simplifiedLeft;
+        }
+
+        return new Add(simplifiedLeft, simplifiedRight);
+    }
+
+    @Override
     public void print() {
         System.out.print("(");
-        this.left_expression.print();
+        left.print();
         System.out.print("+");
-        this.right_expression.print();
+        right.print();
         System.out.print(")");
     }
 }

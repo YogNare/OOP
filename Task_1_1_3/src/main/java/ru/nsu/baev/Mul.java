@@ -1,35 +1,67 @@
 package ru.nsu.baev;
 
-
 import java.util.Map;
 
 public class Mul extends Expression {
 
-    Expression left_expression;
-    Expression right_expression;
+    private final Expression left;
+    private final Expression right;
 
-    public Mul(Expression left_expression, Expression right_expression) {
-        this.left_expression = left_expression;
-        this.right_expression = right_expression;
+    public Mul(Expression left, Expression right) {
+        this.left = left;
+        this.right = right;
     }
 
+    @Override
     public Add derivative(String variable) {
-
         return new Add(
-                new Mul(this.left_expression.derivative(variable), this.right_expression),
-                new Mul(this.left_expression, this.right_expression.derivative(variable))
+                new Mul(left.derivative(variable), right),
+                new Mul(left, right.derivative(variable))
         );
     }
 
-    public double normal_eval(Map<String, Double> variables) {
-        return this.left_expression.normal_eval(variables) * this.right_expression.normal_eval(variables);
+    @Override
+    public double normalEval(Map<String, Double> variables) {
+        return left.normalEval(variables) * right.normalEval(variables);
     }
 
+    @Override
+    public Expression simplification() {
+        Expression simplifiedLeft = left.simplification();
+        Expression simplifiedRight = right.simplification();
+
+        if (simplifiedLeft instanceof Number leftNum) {
+            double leftValue = leftNum.getValue();
+            if (simplifiedRight instanceof Number rightNum) {
+                return new Number(leftValue * rightNum.getValue());
+            }
+            if (leftValue == 0) {
+                return new Number(0);
+            }
+            if (leftValue == 1) {
+                return simplifiedRight;
+            }
+        }
+
+        if (simplifiedRight instanceof Number rightNum) {
+            double rightValue = rightNum.getValue();
+            if (rightValue == 0) {
+                return new Number(0);
+            }
+            if (rightValue == 1) {
+                return simplifiedLeft;
+            }
+        }
+
+        return new Mul(simplifiedLeft, simplifiedRight);
+    }
+
+    @Override
     public void print() {
         System.out.print("(");
-        this.left_expression.print();
+        left.print();
         System.out.print("*");
-        this.right_expression.print();
+        right.print();
         System.out.print(")");
     }
 }
