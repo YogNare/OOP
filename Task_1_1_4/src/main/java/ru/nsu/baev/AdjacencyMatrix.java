@@ -71,18 +71,18 @@ public class AdjacencyMatrix implements Graph {
 
     public List<Integer> topologicalSort() {
         int size = matrix.size();
-        List<Integer> inDegree = new ArrayList<>(Collections.nCopies(size, 0));
+        int[] inDegree = new int[size];
 
         matrix.forEach(row -> {
             for (int col = 0; col < row.size(); col++) {
                 if (row.get(col) == 1) {
-                    inDegree.set(col, inDegree.get(col) + 1);
+                    inDegree[col] ++;
                 }
             }
         });
 
         Queue<Integer> zeroInDegree = IntStream.range(0, size)
-                .filter(i -> inDegree.get(i) == 0)
+                .filter(i -> inDegree[i] == 0)
                 .boxed()
                 .collect(Collectors.toCollection(ArrayDeque::new));
 
@@ -94,8 +94,8 @@ public class AdjacencyMatrix implements Graph {
 
             for (int neighbor = 0; neighbor < size; neighbor++) {
                 if (matrix.get(current).get(neighbor) == 1) {
-                    inDegree.set(neighbor, inDegree.get(neighbor) - 1);
-                    if (inDegree.get(neighbor) == 0) {
+                    inDegree[neighbor] --;
+                    if (inDegree[neighbor] == 0) {
                         zeroInDegree.add(neighbor);
                     }
                 }
