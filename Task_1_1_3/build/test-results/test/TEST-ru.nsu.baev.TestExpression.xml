@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ru.nsu.baev.TestExpression" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-12-02T16:47:04" hostname="MacBook-Air-Chtulhu.local" time="0.011">
+<testsuite name="ru.nsu.baev.TestExpression" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-12-03T06:30:26" hostname="MacBook-Air-Chtulhu.local" time="0.01">
   <properties/>
-  <testcase name="printTest2()" classname="ru.nsu.baev.TestExpression" time="0.011"/>
-  <system-out><![CDATA[]]></system-out>
+  <testcase name="simplificationTest()" classname="ru.nsu.baev.TestExpression" time="0.01"/>
+  <system-out><![CDATA[5]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
