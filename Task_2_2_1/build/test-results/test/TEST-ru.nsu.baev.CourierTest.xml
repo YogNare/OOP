@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ru.nsu.baev.CourierTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2025-05-12T08:51:44" hostname="WS4211-17" time="2.266">
+  <properties/>
+  <testcase name="testCourierDeliversPizza()" classname="ru.nsu.baev.CourierTest" time="1.162"/>
+  <testcase name="testCourierWaitsAndReturnsHome()" classname="ru.nsu.baev.CourierTest" time="0.801"/>
+  <testcase name="testCourierStopsWhenNoPizza()" classname="ru.nsu.baev.CourierTest" time="0.302"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

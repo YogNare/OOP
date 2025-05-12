@@ -1,0 +1,18 @@
+{
+  "bakers": [
+    { "id": 1, "speed": 3000 },
+    { "id": 2, "speed": 2000 }
+  ],
+  "couriers": [
+    { "id": 1, "capacity": 2 },
+    { "id": 2, "capacity": 3 }
+  ],
+  "clients":[
+    {"id": 1, "coords":  [10, 100], "time":  1000},
+    {"id": 2, "coords":  [421, 31], "time":  2179},
+    {"id": 3, "coords":  [84, 320], "time":  1039},
+    {"id": 4, "coords":  [730, 0], "time":  500}
+  ],
+  "storageCapacity": 5,
+  "duration": 20000
+}
