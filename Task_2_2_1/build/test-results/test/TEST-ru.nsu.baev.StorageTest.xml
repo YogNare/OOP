@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ru.nsu.baev.StorageTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2025-05-12T08:51:46" hostname="WS4211-17" time="0.012">
+  <properties/>
+  <testcase name="testPutOrder()" classname="ru.nsu.baev.StorageTest" time="0.004"/>
+  <testcase name="testPutPizzaWhenUnderCapacity()" classname="ru.nsu.baev.StorageTest" time="0.001"/>
+  <testcase name="testGetPizzaWhenNotEmpty()" classname="ru.nsu.baev.StorageTest" time="0.001"/>
+  <testcase name="testGetOrderWhenEmpty()" classname="ru.nsu.baev.StorageTest" time="0.001"/>
+  <testcase name="testGetPizzaWhenEmpty()" classname="ru.nsu.baev.StorageTest" time="0.001"/>
+  <testcase name="testPutPizzaWhenOverCapacity()" classname="ru.nsu.baev.StorageTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

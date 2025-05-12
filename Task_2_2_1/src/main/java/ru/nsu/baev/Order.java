@@ -2,8 +2,8 @@ package ru.nsu.baev;
 
 public class Order {
     private final int id;
-    int x;
-    int y;
+    private final int x;
+    private final int y;
 
     public Order(int id, int x, int y) {
         this.id = id;

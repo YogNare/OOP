@@ -30,6 +30,7 @@ public class Courier extends Thread {
     @Override
     public void run() {
         while (System.currentTimeMillis() < endTime) {
+	    
             for (int i = 0; i < capacity; i++) {
                 Order order = storage.getPizza();
                 if (order != null) {
