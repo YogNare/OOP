@@ -4,32 +4,47 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class Storage {
-    private final int capacity;
-    private final Queue<Order> pizzas = new LinkedList<>();
+    private Integer capacity;
+    private final Queue<Order> pizzaList = new LinkedList<Order>();
+    private final Queue<Order> newOrderList = new LinkedList<Order>();
 
-    public Storage(int capacity) {
-        this.capacity = capacity;
+    public Storage(Integer cp) {
+        capacity = cp;
     }
 
-    public synchronized void addPizza(Order order) throws InterruptedException {
-        while (pizzas.size() >= capacity) {
-            wait();  // Ждем освобождения места
+    public synchronized int putPizza(Order order) {
+        if (pizzaList.size() < capacity) {
+            pizzaList.add(order);
+            order.putToStorage();
+
+            return 0;
+        } else {
+            return 1;
         }
-        pizzas.add(order);
-        System.out.println("[" + order.getId() + "] Готова и помещена на склад");
-        notifyAll();
     }
 
-    public synchronized Order[] takePizzas(int maxCount) throws InterruptedException {
-        while (pizzas.isEmpty()) {
-            wait();  // Ждем появления пицц
+    public synchronized Order getPizza() {
+        if (!pizzaList.isEmpty()) {
+            Order order = pizzaList.remove();
+            order.takeCourier();
+            return order;
         }
-        int count = Math.min(maxCount, pizzas.size());
-        Order[] taken = new Order[count];
-        for (int i = 0; i < count; i++) {
-            taken[i] = pizzas.poll();
+
+        return null;
+    }
+
+    public synchronized Order getOrder() {
+        if (!newOrderList.isEmpty()) {
+            Order order = newOrderList.remove();
+            order.putToBaker();
+            return order;
         }
-        notifyAll();
-        return taken;
+
+        return null;
+    }
+
+    public synchronized void putOrder(Order order) {
+        newOrderList.add(order);
+        order.addToQueue();
     }
 }
