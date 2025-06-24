@@ -7,16 +7,18 @@ import java.util.List;
 public class ThreadPrimeNumbers {
 
     public boolean allPrimes(List<Integer> array, int numThreads) throws InterruptedException {
-        if (!array.isEmpty()) {
-            if (Collections.min(array) < 2) {
-                return false;
-            }
-            Integer maxNum = Collections.max(array);
-            boolean[] isPrime = createSieve(maxNum + 1, numThreads);
-            for (Integer num : array) {
-                if (!isPrime[num]) return false;
-            }
+        if (array.isEmpty()) {
+            return false;
         }
+        if (Collections.min(array) < 2) {
+            return false;
+        }
+        Integer maxNum = Collections.max(array);
+        boolean[] isPrime = createSieve(maxNum + 1, numThreads);
+        for (Integer num : array) {
+            if (!isPrime[num]) return false;
+        }
+
         return true;
     }
 
