@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multiplayer Snake</title>
+  <style>
+    /* Reset default styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 30px;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      position: relative;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 2.8rem;
+      margin-bottom: 25px;
+      color: #00f7ff;
+      text-shadow: 0 0 15px rgba(0, 247, 255, 0.7);
+      letter-spacing: 2px;
+    }
+
+    .input-group {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 25px;
+      justify-content: center;
+    }
+
+    #nameInput {
+      padding: 12px;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      width: 220px;
+      transition: all 0.3s ease;
+    }
+
+    #nameInput::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    #nameInput:focus {
+      outline: none;
+      background: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 0 12px rgba(0, 247, 255, 0.4);
+    }
+
+    button {
+      padding: 12px 24px;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(45deg, #00f7ff, #00ff88);
+      color: #1e1e2f;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(45deg, #00ccff, #00cc70);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0, 247, 255, 0.5);
+    }
+
+    #game {
+      display: block;
+      margin: 0 auto 25px;
+      border-radius: 15px;
+      border: 3px solid transparent;
+      background: linear-gradient(#1a1a3a, #1a1a3a) padding-box,
+      linear-gradient(45deg, #00f7ff, #00ff88) border-box;
+      box-shadow: 0 0 30px rgba(0, 247, 255, 0.5),
+      inset 0 0 15px rgba(0, 247, 255, 0.3);
+      animation: pulse-border 3s infinite ease-in-out;
+      transition: transform 0.3s ease;
+    }
+
+    #game:hover {
+      transform: scale(1.02);
+    }
+
+    @keyframes pulse-border {
+      0% { border-color: rgba(0, 247, 255, 0.8); }
+      50% { border-color: rgba(0, 255, 136, 0.8); }
+      100% { border-color: rgba(0, 247, 255, 0.8); }
+    }
+
+    #leaderboard {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      font-size: 1.2rem;
+      line-height: 1.8;
+      border: 1px solid rgba(0, 247, 255, 0.3);
+    }
+
+    #leaderboard h3 {
+      color: #00f7ff;
+      margin-bottom: 12px;
+      font-size: 1.6rem;
+      text-shadow: 0 0 8px rgba(0, 247, 255, 0.5);
+    }
+
+    @media (max-width: 500px) {
+      .container {
+        padding: 20px;
+      }
+
+      h2 {
+        font-size: 2.2rem;
+      }
+
+      .input-group {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      #nameInput {
+        width: 100%;
+        max-width: 280px;
+      }
+
+      #game {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1/1;
+      }
+
+      #leaderboard {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h2>Multiplayer Snake</h2>
+  <div class="input-group">
+    <input id="nameInput" placeholder="Enter name" />
+    <button onclick="connect()">Play</button>
+  </div>
+  <canvas id="game" width="400" height="400"></canvas>
+  <div id="leaderboard"></div>
+</div>
+
+<script>
+  let socket;
+
+  function connect() {
+    const name = document.getElementById("nameInput").value;
+    socket = new WebSocket("ws://185.94.165.242:8080/snake");
+
+    socket.onopen = () => {
+      socket.send(JSON.stringify({ type: "join", name: name }));
+    };
+
+    socket.onmessage = function(event) {
+      const state = JSON.parse(event.data);
+      draw(state);
+    };
+
+    document.addEventListener("keydown", (e) => {
+      const map = {
+        ArrowUp: "UP",
+        ArrowDown: "DOWN",
+        ArrowLeft: "LEFT",
+        ArrowRight: "RIGHT"
+      };
+      if (map[e.key]) {
+        socket.send(JSON.stringify({ type: "move", direction: map[e.key] }));
+      }
+    });
+  }
+
+  function draw(state) {
+    const canvas = document.getElementById("game");
+    const ctx = canvas.getContext("2d");
+    const tileSize = 10;
+    const gridSize = canvas.width / tileSize;
+
+    // Draw gradient background
+    const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+    gradient.addColorStop(0, "#2a2a4a");
+    gradient.addColorStop(1, "#1a1a3a");
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Draw subtle grid
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.1)";
+    ctx.lineWidth = 0.5;
+    for (let x = 0; x <= canvas.width; x += tileSize) {
+      ctx.beginPath();
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, canvas.height);
+      ctx.stroke();
+    }
+    for (let y = 0; y <= canvas.height; y += tileSize) {
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      ctx.lineTo(canvas.width, y);
+      ctx.stroke();
+    }
+
+    // Draw food (circular with glow)
+    state.food.forEach(f => {
+      ctx.fillStyle = "#ff4d4d";
+      ctx.beginPath();
+      ctx.arc(
+              f.x * tileSize + tileSize / 2,
+              f.y * tileSize + tileSize / 2,
+              tileSize / 2.5,
+              0,
+              Math.PI * 2
+      );
+      ctx.fill();
+      // Glow effect
+      ctx.shadowColor = "#ff4d4d";
+      ctx.shadowBlur = 10;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    });
+
+    // Draw players
+    Object.values(state.players).forEach(player => {
+      // Snake segments (rounded squares with glow for alive snakes)
+      ctx.fillStyle = player.alive ? "#00ff88" : "#666680";
+      player.snake.forEach((p, index) => {
+        ctx.beginPath();
+        if (player.alive && index === 0) {
+          // Head with larger size and glow
+          ctx.arc(
+                  p.x * tileSize + tileSize / 2,
+                  p.y * tileSize + tileSize / 2,
+                  tileSize / 2,
+                  0,
+                  Math.PI * 2
+          );
+          ctx.shadowColor = "#00ff88";
+          ctx.shadowBlur = 15;
+        } else {
+          // Body segments as rounded squares
+          ctx.roundRect(
+                  p.x * tileSize + 1,
+                  p.y * tileSize + 1,
+                  tileSize - 2,
+                  tileSize - 2,
+                  3
+          );
+          ctx.shadowBlur = 0;
+        }
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      });
+
+      // Draw player name with custom font
+      if (player.snake.length > 0) {
+        ctx.font = "12px 'Segoe UI', Arial";
+        ctx.fillStyle = player.alive ? "#ffffff" : "#9999b3";
+        ctx.strokeStyle = "#1a1a3a";
+        ctx.lineWidth = 2;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "bottom";
+        ctx.strokeText(
+                player.name,
+                player.snake[0].x * tileSize + tileSize / 2,
+                player.snake[0].y * tileSize - 3
+        );
+        ctx.fillText(
+                player.name,
+                player.snake[0].x * tileSize + tileSize / 2,
+                player.snake[0].y * tileSize - 3
+        );
+      }
+    });
+
+    // Draw leaderboard
+    const leaderboard = Object.values(state.players)
+            .sort((a, b) => b.score - a.score)
+            .map(p => `${p.name}: ${p.score}`).join("<br>");
+
+    document.getElementById("leaderboard").innerHTML = `<h3>Leader board</h3>${leaderboard}`;
+  }
+
+  // Polyfill for roundRect (for older browsers)
+  if (!CanvasRenderingContext2D.prototype.roundRect) {
+    CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
+      this.beginPath();
+      this.moveTo(x + r, y);
+      this.arcTo(x + w, y, x + w, y + h, r);
+      this.arcTo(x + w, y + h, x, y + h, r);
+      this.arcTo(x, y + h, x, y, r);
+      this.arcTo(x, y, x + w, y, r);
+      this.closePath();
+    };
+  }
+</script>
+</body>
+</html>
