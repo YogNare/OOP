@@ -1,0 +1,14 @@
+package ru.nsu.baev.config;
+
+import ru.nsu.baev.handler.SnakeHandler;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.socket.config.annotation.*;
+
+@Configuration
+@EnableWebSocket
+public class WebSocketConfig implements WebSocketConfigurer {
+    @Override
+    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+        registry.addHandler(new SnakeHandler(), "/snake").setAllowedOrigins("*");
+    }
+}
